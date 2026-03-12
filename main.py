@@ -46,11 +46,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not joined:
 
         keyboard = [
-            [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+yiNqFn6FfZ4wZGM1")]
+            [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+2QARYxytFdo2YWY1")]
         ]
 
         await update.message.reply_text(
-            "❌ You must join our channel first.",
+            "HELLO USER YOU WANT TO ACCESS FILE THEN DO THIS ❌ You must join our channel first.",
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
         return
@@ -94,7 +94,7 @@ async def delete_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
 
     if user_id not in ADMINS:
-        await update.message.reply_text("❌ Admin only")
+        await update.message.reply_text("❌ FUCK YOU THIS Admin only")
         return
 
     if len(context.args) == 0:
@@ -111,7 +111,7 @@ async def delete_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     else:
 
-        await update.message.reply_text("❌ File not found")
+        await update.message.reply_text("❌ Sorry File not found")
 
 
 # ----------------------------
@@ -127,7 +127,7 @@ async def search(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not joined:
 
         keyboard = [
-            [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+yiNqFn6FfZ4wZGM1")]
+            [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+2QARYxytFdo2YWY1")]
         ]
 
         await update.message.reply_text(
@@ -147,7 +147,7 @@ async def search(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if not found:
 
-        await update.message.reply_text("❌ File not found")
+        await update.message.reply_text("❌ Sorry File not found")
         return
 
     for name in found:
