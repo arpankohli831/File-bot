@@ -1,17 +1,17 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
 
-TOKEN = "8760568367:AAE2iBpAr6vlDXe7JyJQtzA6P3GbL0k_Wsc"
+TOKEN = "YOUR_BOT_TOKEN"
 BOT_USERNAME = "http://t.me/ARPAN_MODX_FILE_BOT"
-CHANNEL = "@⸙𓊈Ꭺʀᴘᴀɴ MØᗫ✘𓊉ཧོ🦅 BACKUP"
+CHANNEL = "@ARPANMODX"
 
 ADMINS = [7853887140]
 
 FILES = {}
 
-# -------------------------
+# -----------------
 # CHECK CHANNEL JOIN
-# -------------------------
+# -----------------
 
 async def check_join(user_id, bot):
     try:
@@ -23,9 +23,9 @@ async def check_join(user_id, bot):
         return False
 
 
-# -------------------------
-# START COMMAND
-# -------------------------
+# -----------------
+# START LINK SYSTEM
+# -----------------
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -40,12 +40,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not joined:
 
             keyboard = [
-                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+FCUf23-QbnMwNmY1")],
-                [InlineKeyboardButton("✅ Try Again", callback_data=f"check_{code}")]
+                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+FCUf23-QbnMwNmY1)],
+                [InlineKeyboardButton("✅ Try Again", callback_data=f"file_{code}")]
             ]
 
             await update.message.reply_text(
-                "❌ Join our channel first then press Try Again.",
+                "Please join our channel THEN YOU ACCESS ⸙𓊈Ꭺʀᴘᴀɴ MØᗫ✘𓊉ཧོ🦅 FILES",
                 reply_markup=InlineKeyboardMarkup(keyboard)
             )
             return
@@ -60,12 +60,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return
 
-    await update.message.reply_text("Welcome to File Bot!")
+    await update.message.reply_text("WELCOME TO ⸙𓊈Ꭺʀᴘᴀɴ MØᗫ✘𓊉ཧོ🦅 FILE BOT ")
 
 
-# -------------------------
+# -----------------
 # ADMIN ADD FILE
-# -------------------------
+# -----------------
 
 async def add_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -76,52 +76,22 @@ async def add_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         file = update.message.document
 
-        file_id = file.file_id
-        file_name = file.file_name
+        code = str(len(FILES)+1)
 
-        code = str(len(FILES) + 1)
-
-        FILES[code] = file_id
+        FILES[code] = file.file_id
 
         link = f"http://t.me/ARPAN_MODX_FILE_BOT?start={code}"
 
         await update.message.reply_text(
-            f"✅ File Added\n\n{file_name}\n\nDownload Link:\n{link}"
+            f"File saved\n\nDownload link:\n{link}"
         )
 
 
-# -------------------------
-# ADMIN DELETE FILE
-# -------------------------
-
-async def delete_file(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-    if update.effective_user.id not in ADMINS:
-        await update.message.reply_text("❌ Admin only command")
-        return
-
-    if len(context.args) == 0:
-        await update.message.reply_text("Usage: /delete file_number")
-        return
-
-    code = context.args[0]
-
-    if code in FILES:
-
-        del FILES[code]
-
-        await update.message.reply_text("✅ File deleted")
-
-    else:
-
-        await update.message.reply_text("❌ File not found")
-
-
-# -------------------------
+# -----------------
 # TRY AGAIN BUTTON
-# -------------------------
+# -----------------
 
-async def check_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def try_again(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     query = update.callback_query
     await query.answer()
@@ -133,8 +103,7 @@ async def check_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     joined = await check_join(user.id, context.bot)
 
     if not joined:
-
-        await query.answer("❌ Join channel first!", show_alert=True)
+        await query.answer("Join channel first!", show_alert=True)
         return
 
     file_id = FILES.get(code)
@@ -147,22 +116,21 @@ async def check_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-# -------------------------
+# -----------------
 # MAIN
-# -------------------------
+# -----------------
 
 def main():
 
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("delete", delete_file))
 
     app.add_handler(MessageHandler(filters.Document.ALL, add_file))
 
-    app.add_handler(CallbackQueryHandler(check_button, pattern="check_"))
+    app.add_handler(CallbackQueryHandler(try_again, pattern="file_"))
 
-    print("Bot running...")
+    print("Bot running")
 
     app.run_polling()
 
