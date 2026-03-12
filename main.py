@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Cal
 
 TOKEN = "8760568367:AAE2iBpAr6vlDXe7JyJQtzA6P3GbL0k_Wsc"
 BOT_USERNAME = "http://t.me/ARPAN_MODX_FILE_BOT"
-CHANNEL = "@your_channel"
+CHANNEL = "@⸙𓊈Ꭺʀᴘᴀɴ MØᗫ✘𓊉ཧོ🦅 BACKUP"
 
 ADMINS = [7853887140]
 
@@ -40,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not joined:
 
             keyboard = [
-                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+2QARYxytFdo2YWY1")],
+                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+FCUf23-QbnMwNmY1)],
                 [InlineKeyboardButton("✅ Try Again", callback_data=f"check_{code}")]
             ]
 
