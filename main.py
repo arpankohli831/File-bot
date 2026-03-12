@@ -40,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not joined:
 
             keyboard = [
-                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+FCUf23-QbnMwNmY1)],
+                [InlineKeyboardButton("📢 Join Channel", url="https://t.me/+FCUf23-QbnMwNmY1")],
                 [InlineKeyboardButton("✅ Try Again", callback_data=f"file_{code}")]
             ]
 
